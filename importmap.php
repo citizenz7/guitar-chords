@@ -16,6 +16,18 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    'home' => [
+        'path' => './assets/js/home.js',
+        'entrypoint' => true,
+    ],
+    'admin' => [
+        'path' => './assets/js/admin.js',
+        'entrypoint' => true,
+    ],
+    'contact' => [
+        'path' => './assets/js/contact.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],
@@ -24,5 +36,22 @@ return [
     ],
     '@hotwired/turbo' => [
         'version' => '7.3.0',
+    ],
+    'bootstrap' => [
+        'version' => '5.3.3',
+    ],
+    '@popperjs/core' => [
+        'version' => '2.11.8',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '5.3.3',
+        'type' => 'css',
+    ],
+    'bootstrap/dist/js/bootstrap.bundle.min.js' => [
+        'version' => '5.3.3',
+    ],
+    '@fortawesome/fontawesome-free/css/all.css' => [
+        'version' => '6.7.2',
+        'type' => 'css',
     ],
 ];

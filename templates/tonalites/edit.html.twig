@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Tonalite{% endblock %}
+
+{% block body %}
+    <h1>Edit Tonalite</h1>
+
+    {{ include('tonalite/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_tonalite_index') }}">back to list</a>
+
+    {{ include('tonalite/_delete_form.html.twig') }}
+{% endblock %}

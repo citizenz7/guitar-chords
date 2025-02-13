@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+    <div class="container mt-5 contact">
+        <div id="success" class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold border rounded bg-dark text-white p-3">Recherche</h1>
+
+                <h2 class="text-center h4 mt-4">Rechercher un accord par son nom ou une partie de son nom</h2>
+
+                {{ form_start(searchForm) }}
+                    {{ form_row(searchForm.title) }}
+                    <button type="submit" class="btn btn-primary my-3">Rechercher</button>
+                {{ form_end(searchForm) }}
+
+                {% if chords is not null %} {# Afficher seulement si une recherche a été effectuée #}
+                    <div class="row my-4">
+                        {% if chords|length == 0 %}
+                            <div class="col">
+                                <h4>Aucun résultat pour votre recherche.</h4>
+                            </div>
+                        {% else %}
+                            <h3>Résultats de votre recherche :</h3>
+                            <div class="row">
+                                {% for chord in chords %}
+                                    <div class="col-md-3">
+                                        <a href="{{ path('app_chord_show', {'slug': chord.slug}) }}">
+                                            <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" alt="{{ chord.title }}" class="img-fluid">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

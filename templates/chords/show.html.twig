@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accord : {{ chord.title }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold border rounded bg-dark text-white p-3">Accord : {{ chord.title }}</h1>
+                <div class="row my-5">
+                    <div class="col text-center">
+                        <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" class="img-fluid" width="250px" height="auto" alt="{{ chord.title }}">
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col text-center">
+                        {% if chord.content %}
+                            <p>{{ chord.content|replace({'<div>': '', '</div>': '',})|raw|nl2br }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h2 class="h3 text-center fw-bold border rounded bg-dark text-white p-3">Autres accords dans la même tonalité</h2>
+                {# Tonalité de l'accord actuel #}
+                {% set tonalite = chord.tonalite %}
+
+                {# current_chord #}
+                {% set current_chord = chord %}
+
+                <div class="row row-cols-1 row-cols-md-6 g-4 mt-3 justify-content-center">
+                    {% set other_chords = tonalite.chords|filter(chord => chord.title != current_chord.title) %}
+                    {% for chord in other_chords %}
+                        <div class="col">
+                            <a class="text-decoration-none" href="{{ path('app_chord_show', {'slug': chord.slug}) }}">
+                                <div class="card h-100">
+                                    <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" class="card-img-top" alt="{{ chord.title }}">
+                                    <div class="card-body">
+                                        <h2 class="card-title h5 fw-bold text-center">{{ chord.title }}</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

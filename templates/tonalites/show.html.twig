@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tonalité : {{ tonalite.title }}{% endblock %}
+
+{% block body %}
+    {# <h1>Tonalite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tonalite.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ tonalite.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ tonalite.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tonalite_index') }}">back to list</a>
+
+    <a href="{{ path('app_tonalite_edit', {'id': tonalite.id}) }}">edit</a>
+
+    {{ include('tonalite/_delete_form.html.twig') }} #}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold">TONALITE : {{ tonalite.title }}</h1>
+
+                <div class="row row-cols-1 row-cols-md-6 g-4 mt-3">
+                    {% for chord in tonalite.chords %}
+                        <div class="col">
+                            <a class="text-decoration-none" href="{{ path('app_chord_show', {'slug': chord.slug}) }}">
+                                <div class="card h-100">
+                                    <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" class="card-img-top" alt="{{ chord.title }}">
+                                    <div class="card-body">
+                                        <h2 class="card-title h5 fw-bold text-center">{{ chord.title }}</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

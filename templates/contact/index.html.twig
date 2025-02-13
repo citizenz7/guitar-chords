@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ contact.title }}{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'contact']) }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5 contact">
+        <div id="success" class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold border rounded bg-dark text-white p-3">{{ contact.title }}</h1>
+                <h2 class="h4 fw-bold text-center mt-4">{{ contact.subtitle }}</h2>
+                <div class="text-center fs-5 mt-7">{{ contact.content|raw}}</div>
+
+                <div class="row my-4 justify-content-center">
+                    <div class="col-lg-7 col-sm-12 text-center">
+                        {% for message in app.flashes('success') %}
+                            <div class="message-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+
+                        {{ form_start(form) }}
+                            <div>{{ form_row(form.nom) }}</div>
+                            <div>{{ form_row(form.email) }}</div>
+                            <div>{{ form_row(form.sujet) }}</div>
+                            <div>{{ form_row(form.message) }}</div>
+                            <div class="d-flex justify-content-center mt-4">{{ form_row(form.captcha) }}</div>
+                            <div>{{ form_row(form.submit) }}</div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

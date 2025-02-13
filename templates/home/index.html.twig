@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'home']) }}{% endblock %}
+
+{% block body %}
+	<main>
+		<div class="container-fluid mb-5 home-header" style="background-image: url('{{ asset('uploads/img/pages/' ~ home.image) }}');">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col bg-trans-dark-1 p-4">
+						<h1 class="home-title mb-4">{{ home.mainTitle }}</h1>
+						<h2 class="home-subtitle">{{ home.subtitle }}</h2>
+						<div class="home-text-content text-center text-white">{{ home.content|replace({'<div>': '', '</div>': '',})|raw}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row row-cols-1 row-cols-md-5 g-4">
+				{% for ton in tonalites %}
+					<div class="col">
+						<div class="card h-100">
+							<a href="{{ path('app_tonalite_show', {'slug': ton.slug}) }}" class="card-chord-link">
+								<div class="card-body">
+									<h3 class="card-title fw-bold text-center h1 display-3">{{ ton.title }}</h3>
+								</div>
+								<div class="card-footer text-center">
+									<small class="text-body-secondary">Accord {{ ton.title }}</small>
+								</div>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</main>
+{% endblock %}

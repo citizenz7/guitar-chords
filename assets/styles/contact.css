@@ -1,0 +1,53 @@
+.contact .message-success {
+    color: green;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid green;
+    background-color: rgba(0, 128, 0, 0.1);
+    width: 50%;
+    max-width: 500px;
+}
+
+.contact form {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.contact form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contact form input,
+.contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.contact form textarea {
+    height: 250px;
+    resize: vertical;
+}
+
+.contact form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

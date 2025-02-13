@@ -1,5 +1,5 @@
 # Guitar-Chords
-Annuaire d'accords de guitare, tablatures, tutoriels
+Annuaire d'accords de guitare
 
 ### ENVIRONNEMENT
 * Symfony 7.2
@@ -7,13 +7,10 @@ Annuaire d'accords de guitare, tablatures, tutoriels
 * Composer 2
 * AssetMapper
 * Font Awesome
+* Bootstrap 5
 
 ### ADMIN/BackOffice
 * Url : /admin
-
-**Comptes Admin**
-* Login : citizenz7@protonmail.com
-* Password : 72P3EH2XfVq2ij3w
 
 ### BUNDLES
 * easycorp/easyadmin-bundle
@@ -37,13 +34,6 @@ Annuaire d'accords de guitare, tablatures, tutoriels
 
 ### Créer un mot de passe hashé en console
 `symfony console security:hash-password`
-
-### Google reCapctha
-* clé du site : 6LdvCNYqAAAAACRNREmQcTdGZ1bsKQ-ASVCv8jXL
-* clé secrète : 6LdvCNYqAAAAAMFTikaSrxqbkCUQdhViTPsVyCMp
-
-### Google Analytics
-* G-XXXXXXXXXX
 
 ### AssetMapper
 * Installer un package JS (exemple avec SplideJS) : `php bin/console importmap:require @splidejs/splide`

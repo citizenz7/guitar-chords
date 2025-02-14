@@ -6,10 +6,12 @@ use App\Entity\Setting;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Symfony\Component\Validator\Constraints\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -28,7 +30,23 @@ class SettingCrudController extends AbstractCrudController
                 ->setIcon('fas fa-info')
                 ->setHelp('Informations générales'),
             TextField::new('siteName', 'Titre du site')
-                ->setColumns(6),
+                ->setColumns(12),
+            ImageField::new('siteLogo', 'Logo du site')
+                ->setColumns(6)
+                ->setRequired(false)
+                ->setUploadDir('public/uploads/img')
+                ->setBasePath('uploads/img')
+                ->setUploadedFileNamePattern('[name]-[uuid].[extension]')
+                ->setFileConstraints(new Image(
+                    maxWidth: 800,
+                    maxWidthMessage: 'L\'image est trop large. La largeur max est 800 px.',
+                    maxHeight: 600,
+                    maxHeightMessage: 'L\'image est trop grande. La hauteur max est 600 px.',
+                    maxSize: '50k',
+                    maxSizeMessage: 'L\'image est trop volumineuse. Le poids max est 50 Ko.',
+                    mimeTypes: ['image/png'],
+                    mimeTypesMessage: 'Seul le format png transparent est accepté.'
+                )),
 
             FormField::addTab('Description')
                 ->setIcon('fas fa-file-medical-alt')

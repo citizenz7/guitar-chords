@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\SearchChordType;
 use App\Repository\ChordRepository;
+use App\Repository\SearchRepository;
 use App\Repository\SettingRepository;
 use App\Repository\TonaliteRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,11 +20,13 @@ final class SearchController extends AbstractController
         SettingRepository $settingRepository,
         TonaliteRepository $tonaliteRepository,
         ChordRepository $chordRepository,
+        SearchRepository $searchRepository,
         Request $request,
         PaginatorInterface $paginator
     ): Response {
         $settings = $settingRepository->findOneBy([]);
         $tonalites = $tonaliteRepository->findAll();
+        $search = $searchRepository->findOneBy([]);
 
         // Création du formulaire de recherche
         $searchForm = $this->createForm(SearchChordType::class);
@@ -48,8 +51,12 @@ final class SearchController extends AbstractController
         return $this->render('search/index.html.twig', [
             'settings' => $settings,
             'tonalites' => $tonalites,
+            'search' => $search,
             'chords' => $chords, // ✅ Peut être null au départ
-            'searchForm' => $searchForm
+            'searchForm' => $searchForm,
+            'seoTitle' => $search->getSeoTitle(),
+            'seoUrl' => $search->getSlug(),
+            'seoDescription' => $search->getSeoDescription()
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tonalite;
 use App\Form\TonaliteType;
 use App\Repository\SettingRepository;
+use App\Repository\TonalitePageRepository;
 use App\Repository\TonaliteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +19,19 @@ final class TonaliteController extends AbstractController
     #[Route(name: 'app_tonalite_index', methods: ['GET'])]
     public function index(
         SettingRepository $settingRepository,
-        TonaliteRepository $tonaliteRepository
+        TonaliteRepository $tonaliteRepository,
+        TonalitePageRepository $tonalitePageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
+        $tonalites = $tonaliteRepository->findAll();
+        $tonalitesPage = $tonalitePageRepository->findOneBy([]);
 
         return $this->render('tonalites/index.html.twig', [
             'settings' => $settings,
             'tonalites' => $tonaliteRepository->findAll(),
+            'seoTitle' => $tonalitesPage->getSeoTitle(),
+            'seoUrl' => $tonalitesPage->getSlug(),
+            'seoDescription' => $tonalitesPage->getSeoDescription()
         ]);
     }
 
@@ -53,16 +60,21 @@ final class TonaliteController extends AbstractController
         SettingRepository $settingRepository,
         // Tonalite $tonalite
         TonaliteRepository $tonaliteRepository,
+        TonalitePageRepository $tonalitePageRepository,
         string $slug
     ): Response {
         $settings = $settingRepository->findOneBy([]);
         $tonalite = $tonaliteRepository->findOneBy(['slug' => $slug]);
         $tonalites = $tonaliteRepository->findAll();
+        $tonalitesPage = $tonalitePageRepository->findOneBy([]);
 
         return $this->render('tonalites/show.html.twig', [
             'tonalite' => $tonalite,
             'tonalites' => $tonalites,
-            'settings' => $settings
+            'settings' => $settings,
+            'seoTitle' => $tonalitesPage->getSeoTitle(),
+            'seoUrl' => $tonalitesPage->getSlug(),
+            'seoDescription' => $tonalitesPage->getSeoDescription()
         ]);
     }
 

@@ -30,7 +30,10 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
             'settings' => $settings,
-            'tonalites' => $tonalites
+            'tonalites' => $tonalites,
+            'seoTitle' => 'Se connecter',
+            'seoUrl' => 'login',
+            'seoDescription' => 'Se connecter'
         ]);
     }
 

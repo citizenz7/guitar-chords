@@ -41,6 +41,9 @@ class Setting
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $siteDescription = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $siteLogo = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +153,18 @@ class Setting
     public function setSiteDescription(?string $siteDescription): static
     {
         $this->siteDescription = $siteDescription;
+
+        return $this;
+    }
+
+    public function getSiteLogo(): ?string
+    {
+        return $this->siteLogo;
+    }
+
+    public function setSiteLogo(?string $siteLogo): static
+    {
+        $this->siteLogo = $siteLogo;
 
         return $this;
     }

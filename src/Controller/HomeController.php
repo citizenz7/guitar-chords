@@ -29,7 +29,10 @@ final class HomeController extends AbstractController
             'settings' => $settings,
             'tonalites' => $tonalites,
             'chords' => $chords,
-            'home' => $home
+            'home' => $home,
+            'seoTitle' => $home->getSeoTitle(),
+            'seoUrl' => $home->getSlug(),
+            'seoDescription' => $home->getSeoDescription()
         ]);
     }
 }

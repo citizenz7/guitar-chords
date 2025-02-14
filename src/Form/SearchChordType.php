@@ -21,7 +21,7 @@ class SearchChordType extends AbstractType
                     'placeholder' => 'Rechercher une accords',
                     'class' => 'form-control',
                     'id' => 'search',
-                    'placeholder' => 'Entrez une lettre ou un titre complet'
+                    'placeholder' => 'Entrez une lettre ou un titre complet d\'accord'
                 ]
             ])
         ;

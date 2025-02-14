@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Chord;
+use App\Entity\ChordPage;
 use App\Form\ChordType;
+use App\Repository\ChordPageRepository;
 use App\Repository\ChordRepository;
 use App\Repository\SettingRepository;
 use App\Repository\TonaliteRepository;
@@ -20,16 +22,21 @@ final class ChordController extends AbstractController
     public function index(
         SettingRepository $settingRepository,
         ChordRepository $chordRepository,
-        TonaliteRepository $tonaliteRepository
+        TonaliteRepository $tonaliteRepository,
+        ChordPageRepository $chordPageRepository
     ): Response {
         $settings = $settingRepository->findOneBy([]);
         $chords = $chordRepository->findAll();
         $tonalites = $tonaliteRepository->findAll();
+        $chordsPage = $chordPageRepository->findOneBy([]);
 
         return $this->render('chords/index.html.twig', [
             'settings' => $settings,
             'chords' => $chords,
-            'tonalites' => $tonalites
+            'tonalites' => $tonalites,
+            'seoTitle' => $chordsPage->getSeoTitle(),
+            'seoUrl' => $chordsPage->getSlug(),
+            'seoDescription' => $chordsPage->getSeoDescription()
         ]);
     }
 
@@ -59,16 +66,21 @@ final class ChordController extends AbstractController
         SettingRepository $settingRepository,
         ChordRepository $chordRepository,
         TonaliteRepository $tonaliteRepository,
+        ChordPageRepository $chordPageRepository,
         string $slug
     ): Response {
         $settings = $settingRepository->findOneBy([]);
         $chord = $chordRepository->findOneBy(['slug' => $slug]);
         $tonalites = $tonaliteRepository->findAll();
+        $chordsPage = $chordPageRepository->findOneBy([]);
 
         return $this->render('chords/show.html.twig', [
             'settings' => $settings,
             'chord' => $chord,
-            'tonalites' => $tonalites
+            'tonalites' => $tonalites,
+            'seoTitle' => $chordsPage->getSeoTitle(),
+            'seoUrl' => $chordsPage->getSlug(),
+            'seoDescription' => $chordsPage->getSeoDescription()
         ]);
     }
 

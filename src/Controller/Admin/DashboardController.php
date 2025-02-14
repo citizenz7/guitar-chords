@@ -2,13 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cgu;
 use App\Entity\Home;
 use App\Entity\User;
 use App\Entity\Chord;
+use App\Entity\Search;
 use App\Entity\Apropos;
+use App\Entity\ChordPage;
 use App\Entity\Contact;
 use App\Entity\Setting;
 use App\Entity\Tonalite;
+use App\Entity\TonalitePage;
 use App\Repository\SettingRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -84,16 +88,13 @@ class DashboardController extends AbstractDashboardController
         // PAGES
         // -------------------------------------
         yield MenuItem::section('Pages')->setCssClass('text-warning fw-bold shadow');
+        yield MenuItem::linkToCrud('Accueil', 'fas fa-home', Home::class)->setAction('detail')->setEntityId(1);
+        yield MenuItem::linkToCrud('Accords', 'fa-solid fa-guitar', ChordPage::class)->setAction('detail')->setEntityId(1);
         yield MenuItem::linkToCrud('A propos', 'fas fa-info', Apropos::class)->setAction('detail')->setEntityId(1);
         yield MenuItem::linkToCrud('Contact', 'fas fa-envelope', Contact::class)->setAction('detail')->setEntityId(1);
-        yield MenuItem::linkToCrud('Accueil', 'fas fa-home', Home::class)->setAction('detail')->setEntityId(1);
-
-        // -------------------------------------
-        // ARTICLES
-        // -------------------------------------
-        yield MenuItem::section('Articles')->setCssClass('text-warning fw-bold shadow');
-        // yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
-        // yield MenuItem::linkToCrud('Catégories', 'fas fa-newspaper', Category::class);
+        yield MenuItem::linkToCrud('CGU', 'fas fa-gavel', Cgu::class)->setAction('detail')->setEntityId(1);
+        yield MenuItem::linkToCrud('Recherche', 'fas fa-search', Search::class)->setAction('detail')->setEntityId(1);
+        yield MenuItem::linkToCrud('Tonalités', 'fas fa-music', TonalitePage::class)->setAction('detail')->setEntityId(1);
 
         // -------------------------------------
         // ACCORDS

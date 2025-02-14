@@ -25,7 +25,10 @@ final class AproposController extends AbstractController
         return $this->render('apropos/index.html.twig', [
             'settings' => $settings,
             'tonalites' => $tonalites,
-            'apropos' => $apropos
+            'apropos' => $apropos,
+            'seoTitle' => $apropos->getSeoTitle(),
+            'seoUrl' => $apropos->getSlug(),
+            'seoDescription' => $apropos->getSeoDescription()
         ]);
     }
 }

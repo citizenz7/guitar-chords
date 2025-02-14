@@ -64,6 +64,9 @@ final class ContactController extends AbstractController
             'tonalites' => $tonalites,
             'contact' => $contact,
             'form' => $form,
+            'seoTitle' => $contact->getSeoTitle(),
+            'seoUrl' => $contact->getSlug(),
+            'seoDescription' => $contact->getSeoDescription()
         ]);
     }
 }

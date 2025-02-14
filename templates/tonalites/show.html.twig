@@ -38,7 +38,7 @@
                         <div class="col">
                             <a class="text-decoration-none" href="{{ path('app_chord_show', {'slug': chord.slug}) }}">
                                 <div class="card h-100">
-                                    <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" class="card-img-top" alt="{{ chord.title }}">
+                                    <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" width="250px" class="img-fluid d-block mx-auto" alt="{{ chord.title }}">
                                     <div class="card-body">
                                         <h2 class="card-title h5 fw-bold text-center">{{ chord.title }}</h2>
                                     </div>

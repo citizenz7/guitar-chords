@@ -41,29 +41,26 @@ Annuaire d'accords de guitare
 * Vérifier les mises à jour pour un package JS en particulier : `php bin/console importmap:outdated @splidejs/splide`
 
 ### A FAIRE / VERIFIER AVANT LA MISE EN PROD
-* page login CSS
-* Erreurs personnalisées
-* reCaptcha Google
-* test formulaire de contact
-* flash messages
-* BO css
-* Sitemap
-* robots.txt
-* Favicon
-* Meta + données structurées schema.org
-* Tarteaucitron
-* permissions BO : utilisateurs, commentaires, articles, images, fichiers
-* div dans les crudcontroller ADMIN
-* Responsive
-* SEO :
+* ~~page login CSS~~
+* ~~Erreurs personnalisées~~
+* ~~reCaptcha Google~~
+* ~~test formulaire de contact~~
+* ~~flash messages~~
+* ~~BO css~~
+* ~~Sitemap~~
+* ~~robots.txt~~
+* ~~Favicon~~
+* ~~Meta + données structurées schema.org~~
+* ~~Tarteaucitron~~
+* ~~div dans les crudcontroller ADMIN~~
+* ~~Responsive~~
+* ~~SEO :
     * titre H1 de chaque page
     * vérifier les balise HTML de titre sur chaque page : h1 (une seule par page) puis h2, h3, ...
-    * vérifier les img alt=""
-* CGU
-* Confidentialite
-* constraints dans crud controller sur images et fichiers
-* Mentions légales
-* Un utlisateur qui n'aura pas validé son adresse e-mail ne pourra pas proposer d'article
+    * vérifier les img alt=""~~
+* ~~CGU~~
+* ~~constraints dans crud controller sur images et fichiers~~
+* ~~Mentions légales~~
 
 ### Mise en PROD
 **Installer/compiler les assets**

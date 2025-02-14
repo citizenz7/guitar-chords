@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://guitare-chords.s2ii.xyz/sitemap.xml

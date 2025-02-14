@@ -39,9 +39,12 @@ final class ChordController extends AbstractController
             $chordsPage->getChordsNum()
         );
 
+        $totalChords = $chordRepository->findBy(['active' => true], []);
+
         return $this->render('chords/index.html.twig', [
             'settings' => $settings,
             'chords' => $chords,
+            'totalChords' => $totalChords,
             'chordsPage' => $chordsPage,
             'tonalites' => $tonalites,
             'seoTitle' => $chordsPage->getSeoTitle(),

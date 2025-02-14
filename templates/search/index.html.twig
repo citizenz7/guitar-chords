@@ -20,15 +20,15 @@
                     <div class="row my-4">
                         {% if chords|length == 0 %}
                             <div class="col">
-                                <h4 class="fw-bold text-danger">Aucun résultat pour votre recherche.</h4>
+                                <h4 class="h6 fw-bold text-danger">Aucun résultat pour votre recherche.</h4>
                             </div>
                         {% else %}
-                            <h3 class="fw-bold border-bottom mb-4 text-success">Résultats de votre recherche :</h3>
+                            <h3 class="h5 fw-bold border-bottom mb-4 text-success">Résultats de votre recherche :</h3>
                             <div class="row justify-content-center align-item-center">
                                 {% for chord in chords %}
                                     <div class="col-lg-2 col-sm-12 mb-4">
                                         <a href="{{ path('app_chord_show', {'slug': chord.slug}) }}">
-                                            <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" alt="{{ chord.title }}" class="img-fluid">
+                                            <img src="{{ asset('uploads/img/chords/' ~ chord.image) }}" alt="{{ chord.title }}" class="img-fluid d-block mx-auto">
                                         </a>
                                     </div>
                                 {% endfor %}

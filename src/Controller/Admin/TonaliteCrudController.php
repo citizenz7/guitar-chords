@@ -38,11 +38,11 @@ class TonaliteCrudController extends AbstractCrudController
             ->setPageTitle('edit', 'Modifier une tonalité')
             ->setPageTitle('new', 'Ajouter une tonalité')
             ->setPageTitle('detail', 'Voir une tonalité')
-            ->setDefaultSort(['id' => 'DESC'])
+            ->setDefaultSort(['title' => 'ASC'])
             ->setEntityLabelInPlural('Tonalités')
             ->setEntityLabelInSingular('Tonalité')
             ->showEntityActionsInlined(true)
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(20);
     }
 
     public function configureActions(Actions $actions): Actions

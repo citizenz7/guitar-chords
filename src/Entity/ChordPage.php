@@ -35,6 +35,9 @@ class ChordPage
     #[ORM\Column(type: Types::TEXT)]
     private ?string $seoDescription = null;
 
+    #[ORM\Column]
+    private ?int $chordsNum = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class ChordPage
     public function setSeoDescription(string $seoDescription): static
     {
         $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    public function getChordsNum(): ?int
+    {
+        return $this->chordsNum;
+    }
+
+    public function setChordsNum(int $chordsNum): static
+    {
+        $this->chordsNum = $chordsNum;
 
         return $this;
     }

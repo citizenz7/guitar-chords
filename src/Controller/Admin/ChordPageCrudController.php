@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class ChordPageCrudController extends AbstractCrudController
 {
@@ -27,10 +28,13 @@ class ChordPageCrudController extends AbstractCrudController
             FormField::addTab('Infos générales de la page'),
             // IdField::new('id'),
             TextField::new('title', 'Titre')
-                ->setColumns(6),
+                ->setColumns(5),
             SlugField::new('slug', 'Slug')
+                ->setColumns(5)
                 ->setTargetFieldName('title')
                 ->hideOnIndex(),
+            IntegerField::new('chordsNum', 'Nombre d\'accords sur la page Accords')
+                ->setColumns(2),
             TextField::new('mainTitle', 'Titre principal')
                 ->setColumns(12)
                 ->hideOnIndex(),

@@ -1,44 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tonalite index{% endblock %}
+{% block title %}{{ settings.siteName }} - {{ tonalitesPage.title }}{% endblock %}
 
 {% block body %}
-    {# <h1>Tonalite index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tonalite in tonalites %}
-            <tr>
-                <td>{{ tonalite.id }}</td>
-                <td>{{ tonalite.title }}</td>
-                <td>{{ tonalite.slug }}</td>
-                <td>
-                    <a href="{{ path('app_tonalite_show', {'id': tonalite.id}) }}">show</a>
-                    <a href="{{ path('app_tonalite_edit', {'id': tonalite.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_tonalite_new') }}">Create new</a> #}
-
     <div class="container mt-5">
         <div class="row">
             <div class="col">
-                <h1 class="text-center fw-bold border rounded bg-light p-3">TONALITES</h1>
+                <h1 class="text-center fw-bold border rounded bg-dark text-white p-3">{{ tonalitesPage.title }}</h1>
+                {% if tonalitesPage.subtitle %}
+                    <h2 class="h5 text-center fw-bold my-4">{{ tonalitesPage.subtitle }}</h2>
+                {% endif %}
+                {% if tonalitesPage.content %}
+                    <div class="my-4">{{ tonalitesPage.content|replace({'<div>': '', '</div>': '',})|raw|nl2br }}</div>
+                {% endif %}
                 <div class="row row-cols-1 row-cols-md-5 g-4 mt-3 mb-5">
                     {% for tonalite in tonalites %}
                         <div class="col">

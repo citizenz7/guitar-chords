@@ -2,20 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Chord;
-use App\Entity\ChordPage;
-use App\Form\ChordType;
 use App\Repository\ChordPageRepository;
 use App\Repository\ChordRepository;
 use App\Repository\SettingRepository;
 use App\Repository\TonaliteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/chords')]
+#[Route('/accords')]
 final class ChordController extends AbstractController
 {
     #[Route(name: 'app_chord_index', methods: ['GET'])]
@@ -23,16 +21,28 @@ final class ChordController extends AbstractController
         SettingRepository $settingRepository,
         ChordRepository $chordRepository,
         TonaliteRepository $tonaliteRepository,
-        ChordPageRepository $chordPageRepository
+        ChordPageRepository $chordPageRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+        EntityManagerInterface $em
     ): Response {
         $settings = $settingRepository->findOneBy([]);
-        $chords = $chordRepository->findAll();
         $tonalites = $tonaliteRepository->findAll();
         $chordsPage = $chordPageRepository->findOneBy([]);
+
+        $dql = "SELECT c FROM App\Entity\Chord c WHERE c.active = true ORDER BY c.title ASC";
+        $query = $em->createQuery($dql);
+
+        $chords = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            $chordsPage->getChordsNum()
+        );
 
         return $this->render('chords/index.html.twig', [
             'settings' => $settings,
             'chords' => $chords,
+            'chordsPage' => $chordsPage,
             'tonalites' => $tonalites,
             'seoTitle' => $chordsPage->getSeoTitle(),
             'seoUrl' => $chordsPage->getSlug(),
@@ -78,6 +88,7 @@ final class ChordController extends AbstractController
             'settings' => $settings,
             'chord' => $chord,
             'tonalites' => $tonalites,
+            'chordsPage' => $chordsPage,
             'seoTitle' => $chordsPage->getSeoTitle(),
             'seoUrl' => $chordsPage->getSlug(),
             'seoDescription' => $chordsPage->getSeoDescription()

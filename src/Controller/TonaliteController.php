@@ -2,12 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Tonalite;
-use App\Form\TonaliteType;
 use App\Repository\SettingRepository;
 use App\Repository\TonalitePageRepository;
 use App\Repository\TonaliteRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +26,7 @@ final class TonaliteController extends AbstractController
         return $this->render('tonalites/index.html.twig', [
             'settings' => $settings,
             'tonalites' => $tonaliteRepository->findAll(),
+            'tonalitesPage' => $tonalitesPage,
             'seoTitle' => $tonalitesPage->getSeoTitle(),
             'seoUrl' => $tonalitesPage->getSlug(),
             'seoDescription' => $tonalitesPage->getSeoDescription()
@@ -71,6 +69,7 @@ final class TonaliteController extends AbstractController
         return $this->render('tonalites/show.html.twig', [
             'tonalite' => $tonalite,
             'tonalites' => $tonalites,
+            'tonalitesPage' => $tonalitesPage,
             'settings' => $settings,
             'seoTitle' => $tonalitesPage->getSeoTitle(),
             'seoUrl' => $tonalitesPage->getSlug(),

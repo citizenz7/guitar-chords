@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Article index{% endblock %} #}
+
+{% block importmap %}{{ importmap(['app', 'article']) }}{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold border rounded bg-dark text-white p-3">Tous les articles</h1>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            {% for article in articles %}
+                <div class="col-lg-4 col-sm-12 mb-4">
+                    <a class="text-decoration-none text-dark" href="{{ path('app_article_show', {'slug': article.slug}) }}">
+                        <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="img-index-article">
+                        <h2 class="h5 fw-bold text-center">{{ article.title }}</h2>
+                        <div class="small text-center">
+                            <i class="fa-solid fa-calendar-days"></i> {{ article.createdAt|date('d-m-Y') }},
+                            <i class="fa-solid fa-user"></i> {{ article.author }},
+                            <i class="fa-solid fa-hashtag"></i> Tonalité : {{ article.tonalite }}
+                        </div>
+                        <div class="py-2 small text-center">
+                            {{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col d-flex align-items-center justify-content-center">
+                {{ knp_pagination_render(articles) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

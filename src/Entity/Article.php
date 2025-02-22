@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ChordRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Chord;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
-#[ORM\Entity(repositoryClass: ChordRepository::class)]
-class Chord
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,24 +23,34 @@ class Chord
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $image = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $intro = null;
+
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'chords')]
+    #[ORM\Column(length: 255)]
+    private ?string $mainImage = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Tonalite $tonalite = null;
 
     #[ORM\Column]
-    private ?bool $active = true;
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $isActive = true;
 
     /**
-     * @var Collection<int, Article>
+     * @var Collection<int, Chord>
      */
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'accords')]
-    private Collection $articles;
+    #[ORM\ManyToMany(targetEntity: Chord::class, inversedBy: 'articles')]
+    private Collection $accords;
 
     #[ORM\Column(length: 255)]
     private ?string $seoTitle = null;
@@ -49,7 +60,7 @@ class Chord
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->accords = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -81,14 +92,14 @@ class Chord
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getIntro(): ?string
     {
-        return $this->image;
+        return $this->intro;
     }
 
-    public function setImage(string $image): static
+    public function setIntro(?string $intro): static
     {
-        $this->image = $image;
+        $this->intro = $intro;
 
         return $this;
     }
@@ -98,9 +109,33 @@ class Chord
         return $this->content;
     }
 
-    public function setContent(?string $content): static
+    public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getMainImage(): ?string
+    {
+        return $this->mainImage;
+    }
+
+    public function setMainImage(string $mainImage): static
+    {
+        $this->mainImage = $mainImage;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
@@ -117,48 +152,52 @@ class Chord
         return $this;
     }
 
-    public function isActive(): ?bool
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->active;
+        return $this->createdAt;
     }
 
-    public function setActive(bool $active): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->active = $active;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): static
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Article>
+     * @return Collection<int, chord>
      */
-    public function getArticles(): Collection
+    public function getAccords(): Collection
     {
-        return $this->articles;
+        return $this->accords;
     }
 
-    public function addArticle(Article $article): static
+    public function addAccord(chord $accord): static
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->addAccord($this);
+        if (!$this->accords->contains($accord)) {
+            $this->accords->add($accord);
         }
 
         return $this;
     }
 
-    public function removeArticle(Article $article): static
+    public function removeAccord(chord $accord): static
     {
-        if ($this->articles->removeElement($article)) {
-            $article->removeAccord($this);
-        }
+        $this->accords->removeElement($accord);
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->title;
     }
 
     public function getSeoTitle(): ?string

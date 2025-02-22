@@ -28,6 +28,10 @@ return [
         'path' => './assets/js/contact.js',
         'entrypoint' => true,
     ],
+    'article' => [
+        'path' => './assets/js/article.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

@@ -8,10 +8,11 @@ use App\Entity\User;
 use App\Entity\Chord;
 use App\Entity\Search;
 use App\Entity\Apropos;
-use App\Entity\ChordPage;
+use App\Entity\Article;
 use App\Entity\Contact;
 use App\Entity\Setting;
 use App\Entity\Tonalite;
+use App\Entity\ChordPage;
 use App\Entity\TonalitePage;
 use App\Repository\SettingRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -102,6 +103,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Accords')->setCssClass('text-warning fw-bold shadow');
         yield MenuItem::linkToCrud('Accords', 'fa-solid fa-guitar', Chord::class);
         yield MenuItem::linkToCrud('Tonalités', 'fas fa-music', Tonalite::class);
+
+        // -------------------------------------
+        // BLOG
+        // -------------------------------------
+        yield MenuItem::section('Blog')->setCssClass('text-warning fw-bold shadow');
+        yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Article::class);
 
         // -------------------------------------
         // USERS

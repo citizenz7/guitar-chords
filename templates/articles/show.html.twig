@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block importmap %}{{ importmap(['app', 'article']) }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="h2 text-center fw-bold border rounded bg-dark text-white p-3">{{ article.title }}</h1>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <img src="{{ asset('uploads/img/articles/' ~ article.mainImage) }}" alt="{{ article.title }}" class="img-article">
+                <div class="small text-center mt-3 mb-2 border rounded p-3">
+                    <i class="fa-solid fa-calendar-days"></i> {{ article.createdAt|date('d-m-Y') }},
+                    <i class="fa-solid fa-user"></i> {{ article.author }},
+                    <i class="fa-solid fa-hashtag"></i> Tonalité : {{ article.tonalite }}
+                </div>
+                <div class="py-2 small fst-italic fw-bold">
+                    {{ article.intro|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}
+                </div>
+                <div class="py-2 mb-5">
+                    {{ article.content|replace({'<div>': '', '</div>': '', '<p>': '', '</p>': ''})|raw }}
+                </div>
+
+                {% if article.accords %}
+                    <h2 class="h4 fw-bold border rounded bg-dark text-white p-3">Accords</h2>
+                    <div class="row justify-content-center">
+                        {% for accord in article.accords %}
+                            <div class="col-lg-2 col-sm-12 mb-4">
+                                <div class="card shadow h-100">
+                                    <a class="text-decoration-none text-dark" href="{{ path('app_chord_show', {'slug': accord.slug}) }}">
+                                    <img src="{{ asset('uploads/img/chords/' ~ accord.image) }}" width="250px" class="img-fluid d-block mx-auto" alt="{{ accord.title }}">
+                                    <div class="card-body">
+                                        <h2 class="card-title h5 fw-bold text-center">{{ accord.title }}</h2>
+                                        <div class="small text-center">
+                                            <i class="fa-solid fa-hashtag"></i> Tonalité : {{ accord.tonalite }}
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

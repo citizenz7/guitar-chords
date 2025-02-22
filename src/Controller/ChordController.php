@@ -92,9 +92,9 @@ final class ChordController extends AbstractController
             'chord' => $chord,
             'tonalites' => $tonalites,
             'chordsPage' => $chordsPage,
-            'seoTitle' => $chordsPage->getSeoTitle(),
-            'seoUrl' => $chordsPage->getSlug(),
-            'seoDescription' => $chordsPage->getSeoDescription()
+            'seoTitle' => $chord->getSeoTitle(),
+            'seoUrl' => $chord->getSlug(),
+            'seoDescription' => $chord->getSeoDescription()
         ]);
     }
 
